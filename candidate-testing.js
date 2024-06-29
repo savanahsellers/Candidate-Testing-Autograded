@@ -3,7 +3,7 @@ const input = require('readline-sync');
 // TODO 2: modify your quiz app to ask 5 questions //
 // TODO 1.1a: Define candidateName // 
 let candidateName = "";
-let nameQuestion = "Please enter your name: ";
+let nameQuestion = "Candidtate name: ";
 
 // TODO 1.2a: Define question, correctAnswer, and candidateAnswer //
 let question = "Who was the first American woman in space? ";
@@ -29,41 +29,73 @@ let correctAnswers = [
 
 let candidateAnswers = [];
 
-
 function askForName() {
-  // TODO 1.1b: Ask for candidate's name //``
+// TODO 1.1b: Ask for candidate's name //``
   candidateName = input.question(nameQuestion);
 }
 
-
 function askQuestion() {
-  // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
-  for (let i = 0; i <= questions.length - 1; i++) {
+// TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
+  for (let i = 0; i < questions.length; i++) {
       candidateAnswers[i] = input.question(questions[i]);
     }
 }
 
-
 function gradeQuiz(candidateAnswers) {
-  // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
+// TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
+
+let grade = 0;
+const overallGrade = (grade / questions.length);
+
+for (let i = 0; i < questions.length; i++) {
+  if (candidateAnswers[i].toLowerCase().trim() === correctAnswers[i].toLowerCase().trim()) {
+    grade += 20;
+  }
+}
+
+if (overallGrade >= 80) {
+  statusOfTest = "Passed.";
+} else if (overallGrade < 80) {
+  statusOfTest = "Failed.";
+}
+
 console.log(`
-Your Answer: ${candidateAnswers[i]}
-Correct Answer: ${correctAnswers[i]}
-`)
-//   let grade;  //TODO 3.2 use this variable to calculate the candidates score.
+Candidate Name: ${nameQuestion}
+1) ${questions[0]}
+Your Answer: ${candidateAnswers[0]}
+Correct Answer: ${correctAnswers[0]}
+
+2) ${questions[1]}
+Your Answer: ${candidateAnswers[1]}
+Correct Answer: ${correctAnswers[1]}
+
+3) ${questions[2]}
+Your Answer: ${candidateAnswers[2]}
+Correct Answer: ${correctAnswers[2]}
+
+4) ${questions[3]}
+Your Answer: ${candidateAnswers[3]}
+Correct Answer: ${correctAnswers[3]}
+
+5) ${questions[4]}
+Your Answer: ${candidateAnswers[4]}
+Correct Answer: ${correctAnswers[4]}
+
+>>> Overall Grade: ${overallGrade}% (${grade} out of ${questions.length} correct) <<<
+>>> Status: ${statusOfTest} <<<
+`);
+
+//TODO 3.2 use this variable to calculate the candidates score.
   return grade;
 }
 
-
 function runProgram() {
-  // TODO 1.1c: Greet candidate using their name //
+// TODO 1.1c: Greet candidate using their name //
   askForName();
   console.log("Hello " + candidateName + "!");
   askQuestion();
   gradeQuiz(this.candidateAnswers);
-} 
-
-
+}
 
 // ----------- Don't write any code or change any code below this line ---------- //
 module.exports = {
