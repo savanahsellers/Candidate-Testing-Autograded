@@ -29,6 +29,8 @@ let correctAnswers = [
 
 let candidateAnswers = [];
 
+let questionNum = [1, 2, 3, 4, 5];
+
 function askForName() {
 // TODO 1.1b: Ask for candidate's name //``
   candidateName = input.question(nameQuestion);
@@ -62,28 +64,17 @@ if (grade >= 80) {
   statusOfTest = "FAILED.";
 }
 
+console.log(`\nCandidate Name: ${candidateName}`);
+
+for (let i = 0; i < questionNum.length; i++) {
 console.log(`
-Candidate Name: ${candidateName}
-1) ${questions[0]}
-Your Answer: ${candidateAnswers[0]}
-Correct Answer: ${correctAnswers[0]}
+${questionNum[i]}) ${questions[i]}
+Your Answer: ${candidateAnswers[i]}
+Correct Answer: ${correctAnswers[i]}
+`);
+}
 
-2) ${questions[1]}
-Your Answer: ${candidateAnswers[1]}
-Correct Answer: ${correctAnswers[1]}
-
-3) ${questions[2]}
-Your Answer: ${candidateAnswers[2]}
-Correct Answer: ${correctAnswers[2]}
-
-4) ${questions[3]}
-Your Answer: ${candidateAnswers[3]}
-Correct Answer: ${correctAnswers[3]}
-
-5) ${questions[4]}
-Your Answer: ${candidateAnswers[4]}
-Correct Answer: ${correctAnswers[4]}
-
+console.log(`
 >>> Overall Grade: ${overallGrade}% (${outOf} out of ${questions.length} correct) <<<
 >>> Status: ${statusOfTest} <<<
 `);
@@ -95,7 +86,7 @@ Correct Answer: ${correctAnswers[4]}
 function runProgram() {
 // TODO 1.1c: Greet candidate using their name //
   askForName();
-  console.log("Hello " + candidateName + "!");
+  console.log("Hello " + candidateName + "!\n");
   askQuestion();
   gradeQuiz(this.candidateAnswers);
 }
